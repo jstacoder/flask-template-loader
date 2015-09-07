@@ -21,3 +21,11 @@ config setting
 
 
 see the `test.py` file for an example
+
+by default flask and flask-template-loader, loads app templates before attempting any secondary 
+template loaders, to override this and load `TEMPLATE_LOADERS` loaders or blueprint loaders before
+the apps loader, add this to your apps settings:
+
+```python
+PREPEND_OTHER_LOADERS = True
+```

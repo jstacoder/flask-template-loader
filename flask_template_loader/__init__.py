@@ -10,11 +10,15 @@ class FlaskTemplateLoader(object):
     def init_app(self,app):
         self.app = app
         old_loader = app.jinja_loader
-        self.loaders = [old_loader]
+        if not self.app.config.get('PREPEND_OTHER_LOADERS'):
+            self.loaders = [old_loader]
+        else: 
+            self.loaders = []
         self.add_from_settings()
         self.add_from_blueprints()
-
-        app.jinja_loader = loaders.ChoiceLoader(self.loaders)
+        if not old_loader in self.loaders:
+            self.loaders.append(old_loader)
+        self.app.jinja_loader = loaders.ChoiceLoader(self.loaders)
 
     def add_from_settings(self):
         if self.app.config.get('TEMPLATE_LOADERS'):
