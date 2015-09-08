@@ -6,7 +6,7 @@ from . import FlaskTemplateLoader
 def main():
     app = flask.Flask(__name__)
     app.config['TEMPLATE_LOADERS'] = [
-        'd.loader',
+        'testdir.loader',
     ]
     
     loader = FlaskTemplateLoader(app)
