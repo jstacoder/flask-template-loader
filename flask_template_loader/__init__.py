@@ -28,6 +28,6 @@ class FlaskTemplateLoader(object):
     def add_from_blueprints(self):
         if self.app.blueprints:
             for bp in self.app.blueprints:
-                self.loaders.append(bp.jinja_loader)
+                self.loaders.append(self.app.blueprints[bp].jinja_loader)
 
 
